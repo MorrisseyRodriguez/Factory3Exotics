@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Search, MapPin, TrendingUp } from 'lucide-react';
 
 function App() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleLoadedMetadata = () => {
+      console.log('Video duration:', video.duration);
+    };
+
+    const handleTimeUpdate = () => {
+      // Prevent video from looping at 2 seconds
+      if (video.currentTime >= video.duration - 0.1) {
+        video.pause();
+      }
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Section 1 - Page Title */}
@@ -45,6 +71,7 @@ function App() {
           {/* Video */}
           <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-video mb-6">
             <video
+              ref={videoRef}
               className="w-full h-full object-contain"
               controls
               muted
