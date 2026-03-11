@@ -1,32 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Search, MapPin, TrendingUp } from 'lucide-react';
 
 function App() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleLoadedMetadata = () => {
-      console.log('Video duration:', video.duration);
-    };
-
-    const handleTimeUpdate = () => {
-      // Prevent video from looping at 2 seconds
-      if (video.currentTime >= video.duration - 0.1) {
-        video.pause();
-      }
-    };
-
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    video.addEventListener('timeupdate', handleTimeUpdate);
-
-    return () => {
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -69,18 +44,13 @@ function App() {
           </ul>
 
           {/* Video */}
-          <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-video mb-6">
-            <video
-              ref={videoRef}
-              className="w-full h-full object-contain"
-              controls
-              muted
-              playsInline
-              preload="auto"
-            >
-              <source src="/Videos___Library___Loom_-_9_March_2026.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          <div className="relative rounded-xl overflow-hidden aspect-video mb-6">
+            <iframe
+              src="https://www.loom.com/embed/ad0c47c03c3a4d42b28c8cb81356bc29"
+              frameBorder="0"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
 
           <p className="text-lg text-gray-700 leading-relaxed">
