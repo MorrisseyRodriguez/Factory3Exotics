@@ -44,12 +44,12 @@ function App() {
           </ul>
 
           {/* Video */}
-          <div className="relative rounded-xl overflow-hidden aspect-video mb-6">
+          <div className="relative rounded-xl overflow-hidden mb-6" style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
             <iframe
               src="https://www.loom.com/embed/ad0c47c03c3a4d42b28c8cb81356bc29"
               frameBorder="0"
               allowFullScreen
-              className="w-full h-full"
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
             ></iframe>
           </div>
 
