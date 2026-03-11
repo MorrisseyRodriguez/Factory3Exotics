@@ -47,11 +47,9 @@ function App() {
             <video
               className="w-full h-full object-contain"
               controls
-              autoPlay
               muted
-              loop
               playsInline
-              preload="metadata"
+              preload="auto"
             >
               <source src="/Videos___Library___Loom_-_9_March_2026.mp4" type="video/mp4" />
               Your browser does not support the video tag.
